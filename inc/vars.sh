@@ -10,7 +10,6 @@ SYS_NAME=$(hostname|cut -d. -f1)
 CUR_DATETIME=$(date "+%Y%m%d-%H%M%S")
 
 ## Path Variables
-SCRIPT_DIR=/usr/local/scripts/systems/backups-disk
 CONFIG_FILE=${SCRIPT_DIR}/config/${1}
 
 ## Log file Variables
