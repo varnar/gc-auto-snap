@@ -6,7 +6,6 @@
 
 ## Source in necessary files
 SCRIPT_DIR=/usr/local/scripts/systems/backups-disk
-source ~/.bash_profile
 source $SCRIPT_DIR/inc/vars.sh
 source $SCRIPT_DIR/inc/funcs.sh
 
