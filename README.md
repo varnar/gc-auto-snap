@@ -6,10 +6,16 @@ Calling script in floowing way:
 ./disk-backup.sh config.cfg
 
 config.cfg file is the configuration file where you defining a instance disks that need to be backup.
+
 Example:
 
 #Configuration format:
+
+#
 #[instance name]:[disk name]:[retention days or empty, which will pickup a default from vars.sh][,[disk name]:[retention days or empty, which will pickup a default from vars.sh]]
+#
+
+#
 
 #Instance1 - all disk, with retention day 3
 instance1:*:3
