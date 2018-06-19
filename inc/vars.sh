@@ -44,7 +44,7 @@ fi
 
 ## Email Variables
 EMAIL_CMD=$(which mutt)
-EMAIL_FROM="${SCRIPT_NAME}-${SYS_NAME} <${SCRIPT_NAME}-${SYS_NAME}@westlakefinancial.com>"
+EMAIL_FROM="${SCRIPT_NAME}-${SYS_NAME} <${SCRIPT_NAME}-${SYS_NAME}@email.com>"
 export EMAIL="${EMAIL_FROM}"
 EMAIL_TO="email@email.com"
 EMAIL_CC="email@email.com"
