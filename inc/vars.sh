@@ -17,7 +17,15 @@ LOG_DIR=${SCRIPT_DIR}/logs
 LOG_FILE=${LOG_DIR}/disk-backup-${CUR_DATETIME}.log
 
 ## Snapshot Variables
-SNAP_PREFIX="bkp-$(date +%Y%m%d)"
+if [ "$2" == "" ]
+then
+    SNAP_PREFIX_PRE="bkp-"
+    SNAP_PREFIX="bkp-$(date +%Y%m%d)"
+else
+    SNAP_PREFIX_PRE="bkp-${2}"
+    SNAP_PREFIX="bkp-${2}-$(date +%Y%m%d)"
+fi
+
 ## Default value to retention
 DAYS_RETENTION=3
 
