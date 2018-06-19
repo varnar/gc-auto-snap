@@ -6,6 +6,7 @@
 
 ## Source in necessary files
 SCRIPT_DIR=/usr/local/scripts/systems/backups-disk
+source ~/.bash_profile
 source $SCRIPT_DIR/inc/vars.sh
 source $SCRIPT_DIR/inc/funcs.sh
 
@@ -30,6 +31,7 @@ main ()
            #
            if [[ ${Disks:0:1} == '*' ]]
            then
+                # The configuration is set to backup all disks
                 # Extracting a retention days from config if exist
                 RETENTION_DAYS=$( echo "${Disks}" | cut -d ":" -f 2 )
 
@@ -44,18 +46,20 @@ main ()
                    logMsg INOF Retention days for all disk in $HostName is $RETENTION_DAYS
                 fi
                 logMsg INFO Backup of all disks for ${HostName} | tee -a $LOG_FILE
+                :> ${SCRIPT_DIR}/${HostName}_today_snap_disks.name
                 gcd-backup_all_disk "${HostName}" $RETENTION_DAYS
                 gcd-delete_all_snap "${HostName}"
-           		logMsg INFO "Exit code all disk $?"
+                        logMsg INFO "Exit code all disk $?"
             else
 
                 # The configration provided to do backup for list of disk
                 logMsg INFO "Backup following disks for ${HostName} host:" | tee -a $LOG_FILE
                 logMsg INFO "${Disks}" | tee -a $LOG_FILE
+                :> ${SCRIPT_DIR}/${HostName}_today_snap_disks.name
                 gcd-backup_list_disk "${HostName}" "${Disks}"
                 gcd-delete_all_snap "${HostName}"
-	        logMsg INFO  "Exit code list $?"
-		logMsg INFO |  tee -a $LOG_FILE
+                logMsg INFO  "Exit code list $?"
+                logMsg INFO |  tee -a $LOG_FILE
             fi
         done
     done < ${CONFIG_FILE}
@@ -64,5 +68,4 @@ main ()
 
 ## Run MAIN Function
 main "$@"
-logMsg "INFO" "Backup creation is completed"|tee -a $LOG_FILE
 emailIt "COMPLETE: Google DWH ${1} backup" "${LOG_FILE}"
